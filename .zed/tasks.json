@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Build (Release)",
+    "command": "cmake --build build --config Release",
+    "tags": ["build"]
+  },
+  {
+    "label": "Run",
+    "command": "build/Release/ModelConverter.exe",
+    "tags": ["run"]
+  },
+  {
+    "label": "Build & Run",
+    "command": "cmake --build build --config Release; if ($?) { build/Release/ModelConverter.exe }",
+    "tags": ["build", "run"]
+  }
+]
