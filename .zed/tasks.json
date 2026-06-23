@@ -1,17 +1,39 @@
 [
   {
+    "label": "Build (Debug)",
+    "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build",
+    "tags": ["build"]
+  },
+  {
     "label": "Build (Release)",
-    "command": "cmake --build build --config Release",
+    "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build",
     "tags": ["build"]
   },
   {
     "label": "Run",
-    "command": "build/Release/ModelConverter.exe",
+    "command": "build/ModelConverter",
     "tags": ["run"]
   },
   {
-    "label": "Build & Run",
-    "command": "cmake --build build --config Release; if ($?) { build/Release/ModelConverter.exe }",
-    "tags": ["build", "run"]
+    "label": "Debug",
+    "command": "build/ModelConverter",
+    "tags": ["debug"],
+    "debug": {
+      "type": "lldb",
+      "args": [],
+      "env": {},
+      "cwd": "."
+    }
+  },
+  {
+    "label": "Build & Debug",
+    "command": "cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug && cmake --build build && build/ModelConverter",
+    "tags": ["build", "debug"],
+    "debug": {
+      "type": "lldb",
+      "args": [],
+      "env": {},
+      "cwd": "."
+    }
   }
 ]
