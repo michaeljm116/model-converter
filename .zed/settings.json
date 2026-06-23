@@ -1,0 +1,9 @@
+{
+  "lsp": {
+    "clangd": {
+      "binary": {
+        "path": "C:\\Users\\mikes\\AppData\\Local\\Microsoft\\WinGet\\Packages\\LLVM.clangd_Microsoft.Winget.Source_8wekyb3d8bbwe\\clangd_22.1.6\\bin\\clangd.exe"
+      }
+    }
+  }
+}

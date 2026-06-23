@@ -1,4 +1,5 @@
 CompileFlags:
+  Compiler: clang
   Add:
     - -x
     - c++
@@ -8,6 +9,3 @@ CompileFlags:
     - -IC:/dev/model-converter/build/_deps/assimp-build/include
     - -IC:/dev/model-converter/build/_deps/assimp-src/code/../include
     - -IC:/dev/model-converter/build/_deps/assimp-build/code/../include
-  Compiler: clang-cl
-QueryDriver:
-  - C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe
