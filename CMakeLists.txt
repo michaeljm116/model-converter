@@ -17,7 +17,7 @@ FetchContent_Declare(
 FetchContent_Declare(
     xxhash_cpp
     GIT_REPOSITORY https://github.com/RedSpah/xxhash_cpp.git
-    GIT_TAG v0.2.1
+    GIT_TAG 0.8.1
 )
 
 # Assimp - Open Asset Import Library
@@ -52,7 +52,7 @@ target_link_libraries(ModelConverter PRIVATE assimp::assimp)
 
 target_include_directories(ModelConverter PRIVATE
     ${glm_SOURCE_DIR}
-    ${xxhash_cpp_SOURCE_DIR}
+    ${xxhash_cpp_SOURCE_DIR}/include
 )
 
 # Windows SDK libs (matches original VS project)

@@ -1,0 +1,11 @@
+build/
+*.exe
+*.obj
+*.lib
+*.dll
+*.exp
+*.pdb
+*.ilk
+*.ipdb
+*.iobj
+.vs/
