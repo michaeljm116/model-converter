@@ -24,7 +24,7 @@ uint32_t newUniqueID(std::string s) {
 	//int time = static_cast<int>(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count());
 	//int hash = xxh
 	//return time + UID;
-	
+
 };
 auto cmp = [](std::pair<std::string, int> const & a, std::pair<std::string, int> const & b)
 {
@@ -148,7 +148,7 @@ Shape ShapeCreate (const Mesh &m, const ShapeType &type){
 }
 
 //so what you actually want to do is...
-//find the..... average center and the max total extents 
+//find the..... average center and the max total extents
 //so you need 3 things. 1. totalMax (center + max) 2. avgCenter (centers avg'd together) 3. modelExtents = (totalMax - avgCenter)
 //model center = avg center, model extents = extents;
 bool ModelScaler(PrincipiaModel& m) {
@@ -205,7 +205,7 @@ bool ModelScaler(PrincipiaModel& m) {
 	m.extents = glm::vec3(1.f);
 	int totalSize = m.meshes.size() + m.shapes.size();
 	//m.center = avgCenter / float(totalSize);
-	
+
 	return true;
 }
 

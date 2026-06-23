@@ -61,10 +61,10 @@ bool WritePEModel(PrincipiaModel& m, std::string fn) {
 	int modelNameLength = m.name.length();
 	binaryio.write(CCAST(&modelNameLength), sizeof(int));
 	binaryio.write(m.name.c_str(), modelNameLength);
-	
+
 	//Insert UniqueID;
 	binaryio.write(CCAST(&m.uniqueID), sizeof(uint32_t));
-		
+
 
 	//Find numder of meshes
 	int numMeshes = m.meshes.size();
@@ -122,7 +122,7 @@ bool WritePEModel(PrincipiaModel& m, std::string fn) {
 
 	int numTransforms = 0;
 	binaryio.write(CCAST(&numTransforms), sizeof(int));
-		
+
 	binaryio.close();
 
 	return true;
@@ -152,18 +152,18 @@ bool WriteSkeleton(PrincipiaSkeleton& s, std::string fn) {
 		binaryio.write(sj.name.c_str(), jointNameLength);
 		binaryio.write(CCAST(&sj.parentIndex), sizeof(int));
 		binaryio.write(CCAST(&sj.glInvBindPose), sizeof(glm::mat4)); //MEOW: THIS MAY NEED TO BE CONVERTED
-		
+
 		binaryio.write(CCAST(&sj.glGlobalTransform), sizeof(glm::mat4));
 		//binaryio.write(CCAST(&sj.glTransform), sizeof(glm::mat4));
 
 		binaryio.write(CCAST(&sj.center), sizeof(glm::vec3));
 		binaryio.write(CCAST(&sj.extents), sizeof(glm::vec3));
-		
+
 		int numVerts, numFaces, numShapes, numNodes;
 		numVerts = sj.verts.size();
 		numFaces = sj.faces.size();
 		numShapes = sj.shapes.size();
-		
+
 		binaryio.write(CCAST(&numVerts), sizeof(int));
 		binaryio.write(CCAST(&numFaces), sizeof(int));
 		binaryio.write(CCAST(&numShapes), sizeof(int));
@@ -201,11 +201,11 @@ bool WriteSkeleton(PrincipiaSkeleton& s, std::string fn) {
 		int animNameLength = s.animations[a].name.length();
 		binaryio.write(CCAST(&animNameLength), sizeof(int));
 		binaryio.write(s.animations[a].name.c_str(), animNameLength);
-		
+
 		//save duration and fps
 		binaryio.write(CCAST(&s.animations[a].duration), sizeof(float));
 		binaryio.write(CCAST(&s.animations[a].fps), sizeof(float));
-	
+
 		//save the channels =/
 		//MEOW: THIS IS CURRENTLY ASSUMING THAT IT USES EVERY CHANNEL AND IS SORTED BY JOINT ALREADY
 		binaryio.write(CCAST(&s.animations[a].numChannels), sizeof(int));
@@ -246,7 +246,7 @@ PrincipiaModel ReadPEModel(const char* pFile){
 		mod.name.push_back(c);
 	}
 
-	
+
 	//Get num meshes;
 	binaryio.read(CCAST(&numMesh), sizeof(int));
 
@@ -325,7 +325,7 @@ bool DoTheImportThing(const std::string& pFile, PrincipiaModel& m, PrincipiaSkel
 		}
 	}
 	m.name = m.name.substr(0, indexico);
-	
+
 	if(hasAnim)
 	LoadBones(pScene, tds);
 
@@ -347,7 +347,7 @@ bool DoTheImportThing(const std::string& pFile, PrincipiaModel& m, PrincipiaSkel
 	for (size_t i = 0; i < pScene->mNumMeshes; ++i) {
 		Mesh subset;
 		aiMesh* paiMesh = pScene->mMeshes[i];
-		
+
 		//blender does this stupid thing where it chagnes the name from EX: Pants to Pants.001
 		//so you have to deprecate the .001 cause they just HAVE to be annoying
 		subset.name = paiMesh->mName.C_Str();
@@ -366,13 +366,13 @@ bool DoTheImportThing(const std::string& pFile, PrincipiaModel& m, PrincipiaSkel
 			aiVector3D vert = paiMesh->mVertices[v];
 			aiVector3D norm = aiVector3D();// paiMesh->mNormals[v];
 			aiVector3D* txtr = nullptr;
-			aiVector3D tang = aiVector3D(); 
+			aiVector3D tang = aiVector3D();
 			if (paiMesh->HasTextureCoords(v))
 				txtr = paiMesh->mTextureCoords[v];
 			if (paiMesh->HasNormals())
 				norm = paiMesh->mNormals[v];
-			
-			
+
+
 			//Transform the verts;
 			//auto node = sceneChildren[subset.name];
 			//vert *= node->mTransformation.Transpose();
@@ -425,8 +425,8 @@ bool DoTheImportThing(const std::string& pFile, PrincipiaModel& m, PrincipiaSkel
 		//subset.transform = aiMatrix4x4ToGlm(subchild);
 		//m.meshes.push_back(subset);
 		ShapeType type = ShapeCheck(subset.name);
-		if (type == ShapeType::MESH) { 
-			m.meshes.push_back(subset); subset.id = m.meshes.size() - 1; 
+		if (type == ShapeType::MESH) {
+			m.meshes.push_back(subset); subset.id = m.meshes.size() - 1;
 		}
 		else {
 			m.shapes.push_back(ShapeCreate(subset, type));
@@ -451,7 +451,7 @@ bool DoTheImportThing(const std::string& pFile, PrincipiaModel& m, PrincipiaSkel
 				//tds.skeletonJoints[boneIndex].glOffset = aiMatrix4x4ToGlm(tds.skeletonJoints[boneIndex].invBindPose);
 				tds.bones.push_back(paiMesh->mBones[i]);
 
-				//First check if its a shape if o then just 
+				//First check if its a shape if o then just
 				if (type == ShapeType::SPHERE) {
 					//int index = tds.nodeIndexes[paiMesh->mBones[i]->mName.data];
 					tds.skeletonJoints[boneIndex].jointObjs.push_back(JointObject(m.shapes.size() - 1, -1));
@@ -540,7 +540,7 @@ bool DoTheImportThing(const std::string& pFile, PrincipiaModel& m, PrincipiaSkel
 
 	for (size_t i = 0; i < m.meshes.size(); ++i)
 		m.meshes[i].id = sceneMeshes[m.meshes[i].originalName];
-	
+
 	// We're done. Everything will be cleaned up by the importer destructor
 	aiNode* rooot = pScene->mRootNode;
 	std::vector<std::string> names;
@@ -580,7 +580,7 @@ bool LoadDirectory(std::string directory, bool triangulate)
 			if (triangulate)
 				mod.name += "_t";
 			WritePEModel(mod,"Output/"+ mod.name + ".pm");
-			if(hasAnim) 
+			if(hasAnim)
 				WriteSkeleton(skeleton, "Output/" + mod.name + ".pa");
 		}
 	}
@@ -672,7 +672,7 @@ bool LoadBones(const aiScene* scene, tempDataStruct& tds) {
 
 		tds.skeletonJoints.emplace_back(j);
 	}
-	//Everything should technically be set up by now 
+	//Everything should technically be set up by now
 	//EXCEPT for the fact that the invBindPose is probably wrong and needs to be based off the bone itself and nto just the node
 	//So we now need to get the bone from the mesh since for some ridiculous reason they didn't leave this info in the node
 	//actually one thing we can do is just manually make these all by combinding the transforms

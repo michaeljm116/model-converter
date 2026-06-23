@@ -1,0 +1,7 @@
+{
+  "lsp": {
+    "clangd": {
+      "binary": { "path": "/opt/homebrew/opt/llvm/bin/clangd" }
+    }
+  }
+}
