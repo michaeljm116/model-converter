@@ -1,0 +1,22 @@
+[
+  {
+    "label": "Debug Odin",
+    "adapter": "lldb",
+    "request": "launch",
+    "program": "$ZED_WORKTREE_ROOT/model-converter",
+    "args": [],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "env": {},
+    "build": "Odin Build (Debug)"
+  },
+  {
+    "label": "Debug C++",
+    "adapter": "lldb",
+    "request": "launch",
+    "program": "$ZED_WORKTREE_ROOT/build/ModelConverter",
+    "args": [],
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "env": {},
+    "build": "Build (Debug)"
+  }
+]

@@ -60,7 +60,7 @@ struct Bounds {
 
 	Bounds combine(Bounds& b) {
 		//find the highest and the lowest x and y values
-		
+
 		//this is stupid and slow but i dont care cause its offline and im lazy righit now
 		glm::vec3 max;
 		for (int i = 0; i < 3; ++i) max[i] = std::max(this->max()[i], b.max()[i]);// std::max(this->max(), b.max());
@@ -86,7 +86,7 @@ struct Bounds {
 };
 
 struct kBounds {
-	//this is just an interface 
+	//this is just an interface
 	//kBounds(Mesh* m) : mesh(m) {};
 	virtual Bounds getBounds()  = 0;
 };
@@ -115,7 +115,7 @@ struct Face : public kBounds {
 	std::vector<Vertex> const * vertices;
 
 	Face(std::vector<Vertex> const * verts) : vertices(verts) {};
-	
+
 	Bounds getBounds() override {
 		//find dthe max and min qualities in the verts and make a bounds from it
 		glm::vec3 max = vertices->at(v.x).position;

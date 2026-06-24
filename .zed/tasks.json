@@ -35,5 +35,37 @@
       "env": {},
       "cwd": "."
     }
+  },
+  {
+    "label": "Odin Build (Debug)",
+    "command": "odin build . -debug",
+    "tags": ["build", "odin"]
+  },
+  {
+    "label": "Odin Run",
+    "command": "./model-converter",
+    "tags": ["run", "odin"]
+  },
+  {
+    "label": "Odin Debug",
+    "command": "./model-converter",
+    "tags": ["debug", "odin"],
+    "debug": {
+      "type": "lldb",
+      "args": [],
+      "env": {},
+      "cwd": "."
+    }
+  },
+  {
+    "label": "Odin Build & Debug",
+    "command": "odin build . -debug && ./model-converter",
+    "tags": ["build", "debug", "odin"],
+    "debug": {
+      "type": "lldb",
+      "args": [],
+      "env": {},
+      "cwd": "."
+    }
   }
 ]

@@ -43,7 +43,6 @@ int main() {
 	bool t = false;
 	if (triangulate == 'y') t = true;
 	LoadDirectory("Input", t);
-	system("Pause");
 }
 
 bool WritePEModel(PrincipiaModel& m, std::string fn) {
@@ -52,7 +51,7 @@ bool WritePEModel(PrincipiaModel& m, std::string fn) {
 	binaryio.open(fn, std::ios::out | std::ios::binary);
 
 	//Intro
-	std::string intro = "Principia Model File v1.0 created by Mike Murrell\n� 2018 Mike Murrell\nAll rights Reserved\n\n";
+	std::string intro = "2026 Mike Murrell\nAll rights Reserved\n\n";
 	int introLength = intro.length();
 	binaryio.write(CCAST(&introLength), sizeof(int));
 	binaryio.write(intro.c_str(), introLength);
@@ -102,9 +101,9 @@ bool WritePEModel(PrincipiaModel& m, std::string fn) {
 		}
 
 		//BVHs
-		for (auto n : m.meshes[i].bvh) {
-			binaryio.write(CCAST(&n), sizeof(flatBVHNode));
-		}
+		// for (auto n : m.meshes[i].bvh) {
+		// 	binaryio.write(CCAST(&n), sizeof(flatBVHNode));
+		// }
 	}
 
 	//find number of shapes

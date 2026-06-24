@@ -243,7 +243,7 @@ load_pmodel :: proc(file_name : string, allocator: mem.Allocator) -> Model
 
     // Now get the shapes
     num_shapes := read_i32(binaryio)
-    mod.shapes = make([dynamic]Shape, 0, num_shapes, allocator)
+    mod.shapes = make([dynamic]Shape, num_shapes, num_shapes, allocator)
     for s in 0..<num_shapes{
         shape : Shape
         s_name_length := read_i32(binaryio)
